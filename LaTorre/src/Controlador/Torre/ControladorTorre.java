@@ -1,5 +1,6 @@
 package Controlador.Torre;
 
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JTextField;
 
 /**
@@ -8,12 +9,22 @@ import javax.swing.JTextField;
  */
 public class ControladorTorre {
 
-    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero) {
-        boolean u = unidades.getText().equals(numero.getText().substring(2, 3));
-        boolean d = decenas.getText().equals(numero.getText().substring(1, 2));
-        boolean c = centenas.getText().equals(numero.getText().substring(0, 1));
+    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero, int i) {
+        boolean u;
+        boolean d;
+        boolean c;
+        if (i == 3) {
+            u = unidades.getText().equals(numero.getText().substring(2, 3));
+            d = decenas.getText().equals(numero.getText().substring(1, 2));
+            c = centenas.getText().equals(numero.getText().substring(0, 1));
+            return (u && d && c);
+        }
+        u = unidades.getText().equals(numero.getText().substring(1, 2));
+        d = decenas.getText().equals(numero.getText().substring(0, 1));
+        c = centenas.getText().equals("0");
         return (u && d && c);
     }
+
     public String[] centenas() {
         String[] centenas = {"Ciento", "Cien", "Doscientos", "Trescientos", "Cuatrocientos",
             "Quinientos", "Seiscientos", "Setecientos", "Ochocientos", "Novecientos"};
@@ -31,7 +42,7 @@ public class ControladorTorre {
         return unidades;
     }
 
-    public String numeros(int a) {
+    public String aLetrasTresCifras(int a) {
         int u = a % 10;
         int d = (a / 10) % 10;
         int c = a / 100;
@@ -75,5 +86,16 @@ public class ControladorTorre {
         }
         return numeroLetra + ".";
     }
+
+        public int random(int i) {
+        double aux;
+        if (i == 2) {
+            aux = ThreadLocalRandom.current().nextInt(10, 99 + 1);
+            return (int) (aux);
+        }
+        aux = ThreadLocalRandom.current().nextInt(100, 999 + 1);
+        return (int) (aux);
+
+    } 
 
 }
