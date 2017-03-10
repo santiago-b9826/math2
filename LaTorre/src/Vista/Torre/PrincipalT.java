@@ -22,12 +22,12 @@ public class PrincipalT extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         inicializarLabels();
         this.j = j;
-//        if (j == 2) {
-//            Torre = new ControladorTorreDosCifras();
-//        } else {
-//            Torre = new ControladorTorreTresCifras();
-//        }
-        txtNumero.setText(Integer.toString(Torre.random(j)));
+        if (j == 2) {
+            Torre = new ControladorTorreDosCifras();
+        } else {
+            Torre = new ControladorTorreTresCifras();
+        }
+        txtNumero.setText(Integer.toString(Torre.random()));
         i = 0;
     }
 
@@ -124,7 +124,7 @@ public class PrincipalT extends javax.swing.JFrame {
         boolean numeroValido = Torre.validarNumero(txtUnidades, txtDecenas, txtCentenas, txtNumero);
         if (numeroValido && i < 9) {
             labels()[i].setVisible(true);
-            txtNumero.setText(Integer.toString(Torre.random(j)));
+            txtNumero.setText(Integer.toString(Torre.random()));
             reiniciarTxt();
             //Mensaje felicitando
             i += 1;
@@ -137,10 +137,10 @@ public class PrincipalT extends javax.swing.JFrame {
         return labels()[i];
     }
 
-    public void inicializarLabels() {
+    private void inicializarLabels() {
         JLabel[] vectorLabels = labels();
-        for (int j = 0; j < 9; j++) {
-            vectorLabels[j].setVisible(false);
+        for (int k = 0; k < 9; k++) {
+            vectorLabels[k].setVisible(false);
         }
     }
 
