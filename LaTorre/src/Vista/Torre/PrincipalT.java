@@ -1,6 +1,8 @@
 package Vista.Torre;
 
-import Controlador.Torre.ControladorTorre;
+import Controlador.Torre.ControladorT;
+import Controlador.Torre.ControladorTorreDosCifras;
+import Controlador.Torre.ControladorTorreTresCifras;
 import javax.swing.JLabel;
 
 /**
@@ -11,7 +13,7 @@ import javax.swing.JLabel;
  */
 public class PrincipalT extends javax.swing.JFrame {
 
-    ControladorTorre Torre;
+    ControladorT Torre;
     int i;
     int j;
 
@@ -20,7 +22,11 @@ public class PrincipalT extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         inicializarLabels();
         this.j = j;
-        Torre = new ControladorTorre();
+//        if (j == 2) {
+//            Torre = new ControladorTorreDosCifras();
+//        } else {
+//            Torre = new ControladorTorreTresCifras();
+//        }
         txtNumero.setText(Integer.toString(Torre.random(j)));
         i = 0;
     }
@@ -115,7 +121,7 @@ public class PrincipalT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTorreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTorreActionPerformed
-        boolean numeroValido = Torre.validarNumero(txtUnidades, txtDecenas, txtCentenas, txtNumero,this.j);
+        boolean numeroValido = Torre.validarNumero(txtUnidades, txtDecenas, txtCentenas, txtNumero);
         if (numeroValido && i < 9) {
             labels()[i].setVisible(true);
             txtNumero.setText(Integer.toString(Torre.random(j)));
@@ -137,7 +143,8 @@ public class PrincipalT extends javax.swing.JFrame {
             vectorLabels[j].setVisible(false);
         }
     }
-    public void reiniciarTxt(){
+
+    public void reiniciarTxt() {
         txtUnidades.setText("");
         txtDecenas.setText("");
         txtCentenas.setText("");
