@@ -12,8 +12,17 @@ import javax.swing.JTextField;
  *
  * @author santiago.bedoya5
  */
-public class ControladorTorreTresCifras {
+public class ControladorTorreTresCifras implements ControladorTorre {
 
+    /**
+     *
+     * @param unidades
+     * @param decenas
+     * @param centenas
+     * @param numero
+     * @return
+     */
+    @Override
     public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero) {
         boolean u;
         boolean d;
@@ -41,7 +50,13 @@ public class ControladorTorreTresCifras {
         return unidades;
     }
 
-    public String aLetrasTresCifras(int a) {
+    /**
+     *
+     * @param a
+     * @return
+     */
+    @Override
+    public String cifrasALetras(int a) {
         int u = a % 10;
         int d = (a / 10) % 10;
         int c = a / 100;
@@ -86,7 +101,12 @@ public class ControladorTorreTresCifras {
         return numeroLetra + ".";
     }
 
-    public int random(int i) {
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int random() {
         double aux;
         aux = ThreadLocalRandom.current().nextInt(100, 999 + 1);
         return (int) (aux);
