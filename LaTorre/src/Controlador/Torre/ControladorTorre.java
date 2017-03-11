@@ -8,9 +8,11 @@ import javax.swing.JTextField;
  * @author Angelica Arroyame Mendoza
  * @author Juan Pablo Romero Laverde
  */
-public interface ControladorT {
+public interface ControladorTorre {
 
     public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero);
+
     public String cifrasALetras(int a);
-    int random(int i);
+
+    int random();
 }

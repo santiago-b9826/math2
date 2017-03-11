@@ -1,6 +1,6 @@
 package Vista.Torre;
 
-import Controlador.Torre.ControladorT;
+import Controlador.Torre.ControladorTorre;
 import Controlador.Torre.ControladorTorreDosCifras;
 import Controlador.Torre.ControladorTorreTresCifras;
 import javax.swing.JLabel;
@@ -13,7 +13,7 @@ import javax.swing.JLabel;
  */
 public class PrincipalT extends javax.swing.JFrame {
 
-    ControladorT Torre;
+    ControladorTorre Torre;
     int i;
     int j;
 

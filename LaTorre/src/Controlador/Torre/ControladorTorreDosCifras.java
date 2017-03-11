@@ -9,8 +9,17 @@ import javax.swing.JTextField;
  * @author Angelica Arroyame Mendoza
  * @author Juan Pablo Romero Laverde
  */
-public class ControladorTorreDosCifras {
+public class ControladorTorreDosCifras implements ControladorTorre {
 
+    /**
+     *
+     * @param unidades
+     * @param decenas
+     * @param centenas
+     * @param numero
+     * @return
+     */
+    @Override
     public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero) {
         boolean u;
         boolean d;
@@ -32,6 +41,12 @@ public class ControladorTorreDosCifras {
         return unidades;
     }
 
+    /**
+     *
+     * @param a
+     * @return
+     */
+    @Override
     public String cifrasALetras(int a) {
         int u = a % 10;
         int d = a / 10;
@@ -66,6 +81,11 @@ public class ControladorTorreDosCifras {
         return numeroLetra + ".";
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public int random() {
         double aux;
         aux = ThreadLocalRandom.current().nextInt(10, 99 + 1);
