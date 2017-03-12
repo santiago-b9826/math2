@@ -3,7 +3,7 @@ package Vista;
 import Controlador.ControladorTorre;
 import Controlador.ControladorTorreDosCifras;
 import Controlador.ControladorTorreTresCifras;
-import Modelo.Torre;
+import Modelo.ModeloTorre;
 import javax.swing.JLabel;
 
 /**
@@ -15,15 +15,15 @@ import javax.swing.JLabel;
 public class VistaTorre extends javax.swing.JFrame {
 
     ControladorTorre ControladorTorre;
-    Torre Torre;
+    ModeloTorre Torre;
 
-    public VistaTorre(int j) {
+    public VistaTorre(int cantidadDeCifras) {
         initComponents();
         setLocationRelativeTo(null);
         inicializarLabels();
-        if (j == 2) {
+        if (cantidadDeCifras == 2) {
             ControladorTorre = new ControladorTorreDosCifras();
-            txtCentenas.setVisible(false);
+            txtFCentenas.setVisible(false);
         } else {
             ControladorTorre = new ControladorTorreTresCifras();
         }
@@ -49,9 +49,9 @@ public class VistaTorre extends javax.swing.JFrame {
         nivel10 = new javax.swing.JLabel();
         fondoScroll = new javax.swing.JLabel();
         btnTorre = new javax.swing.JButton();
-        txtCentenas = new javax.swing.JTextField();
-        txtDecenas = new javax.swing.JTextField();
-        txtUnidades = new javax.swing.JTextField();
+        txtFCentenas = new javax.swing.JTextField();
+        txtFDecenas = new javax.swing.JTextField();
+        txtFUnidades = new javax.swing.JTextField();
         txtNumero = new javax.swing.JTextField();
         Fondo = new javax.swing.JLabel();
 
@@ -107,9 +107,9 @@ public class VistaTorre extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTorre, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, -1, -1));
-        getContentPane().add(txtCentenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 70, -1));
-        getContentPane().add(txtDecenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 70, -1));
-        getContentPane().add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 70, -1));
+        getContentPane().add(txtFCentenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 70, -1));
+        getContentPane().add(txtFDecenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 70, -1));
+        getContentPane().add(txtFUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 70, -1));
 
         txtNumero.setEnabled(false);
         getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 260, -1));
@@ -121,27 +121,25 @@ public class VistaTorre extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTorreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTorreActionPerformed
-        boolean numeroValido;
-        numeroValido = ControladorTorre.validarNumero(txtUnidades, txtDecenas, txtCentenas, Torre.getN()[0]);
-        int piso = Torre.getNivel();
-        if (numeroValido && piso < 9) {
-            nuevoNumero(piso);
+        boolean numeroValido = ControladorTorre.validarNumero(txtFUnidades, txtFDecenas, txtFCentenas, Torre.getNumeros()[0]);
+        int nivel = Torre.getNivel();
+        if (numeroValido && nivel < 9) {
+            nuevoNumero(nivel);
         }
-        reiniciarTxt();
-
+        reiniciarTxtF();
     }//GEN-LAST:event_btnTorreActionPerformed
     public JLabel label(int i) {
         return labels()[i];
     }
 
     private void nuevoNumero() {
-        ControladorTorre.aleatorio();
-        txtNumero.setText(Torre.getN()[1]);
+        ControladorTorre.siguienteNumeroAleatorio();
+        txtNumero.setText(Torre.getNumeros()[1]);
     }
 
-    private void nuevoNumero(int piso) {
-        labels()[piso].setVisible(true);
-        Torre.setNivel(piso + 1);
+    private void nuevoNumero(int nivel) {
+        label(nivel).setVisible(true);
+        Torre.setNivel(nivel + 1);
         nuevoNumero();
     }
 
@@ -152,10 +150,10 @@ public class VistaTorre extends javax.swing.JFrame {
         }
     }
 
-    public void reiniciarTxt() {
-        txtUnidades.setText("");
-        txtDecenas.setText("");
-        txtCentenas.setText("");
+    public void reiniciarTxtF() {
+        txtFUnidades.setText("");
+        txtFDecenas.setText("");
+        txtFCentenas.setText("");
     }
 
     public JLabel[] labels() {
@@ -170,41 +168,6 @@ public class VistaTorre extends javax.swing.JFrame {
         vectorLabels[7] = nivel9;
         vectorLabels[8] = nivel10;
         return vectorLabels;
-    }
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaTorre(2).setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -223,9 +186,9 @@ public class VistaTorre extends javax.swing.JFrame {
     private javax.swing.JLabel nivel7;
     private javax.swing.JLabel nivel8;
     private javax.swing.JLabel nivel9;
-    private javax.swing.JTextField txtCentenas;
-    private javax.swing.JTextField txtDecenas;
+    private javax.swing.JTextField txtFCentenas;
+    private javax.swing.JTextField txtFDecenas;
+    private javax.swing.JTextField txtFUnidades;
     private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables
 }

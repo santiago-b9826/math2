@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Torre;
+import Modelo.ModeloTorre;
 import javax.swing.JTextField;
 
 /**
@@ -11,13 +11,11 @@ import javax.swing.JTextField;
  */
 public interface ControladorTorre {
 
-    public Torre getTorre();
+    public ModeloTorre getTorre();
 
-    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, String numero);
+    public boolean validarNumero(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas, String numeroCorrecto);
 
     public String cifrasALetras(int a);
 
-    int random();
-
-    public void aleatorio();
+    public void siguienteNumeroAleatorio();
 }

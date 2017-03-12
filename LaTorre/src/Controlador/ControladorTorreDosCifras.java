@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Torre;
+import Modelo.ModeloTorre;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.swing.JTextField;
 
@@ -12,32 +12,32 @@ import javax.swing.JTextField;
  */
 public class ControladorTorreDosCifras implements ControladorTorre {
 
-    Torre Torre = new Torre();
+    ModeloTorre Torre = new ModeloTorre();
 
     /**
      *
      * @return
      */
     @Override
-    public Torre getTorre() {
+    public ModeloTorre getTorre() {
         return Torre;
     }
 
     /**
      *
-     * @param unidades
-     * @param decenas
-     * @param centenas
-     * @param numero
+     * @param txtFUnidades
+     * @param txtFDecenas
+     * @param txtFCentenas
+     * @param numeroCorrecto
      * @return
      */
     @Override
-    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, String numero) {
-        boolean u;
-        boolean d;
-        u = unidades.getText().equals(numero.substring(1, 2));
-        d = decenas.getText().equals(numero.substring(0, 1));
-        return (u && d);
+    public boolean validarNumero(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas, String numeroCorrecto) {
+        boolean unidadesCorrectas;
+        boolean decenasCorrectas;
+        unidadesCorrectas = txtFUnidades.getText().equals(numeroCorrecto.substring(1, 2));
+        decenasCorrectas = txtFDecenas.getText().equals(numeroCorrecto.substring(0, 1));
+        return (unidadesCorrectas && decenasCorrectas);
     }
 
     public String[] decenas() {
@@ -58,85 +58,87 @@ public class ControladorTorreDosCifras implements ControladorTorre {
      */
     @Override
     public String cifrasALetras(int a) {
-        int u = a % 10;
-        int d = a / 10;
-        String numeroLetra = "";
-        String[] decenas = decenas();
-        String[] unidades = unidades();
+        int unidades = a % 10;
+        int decenas = a / 10;
+        String numeroEnLetras = "";
+        String[] vectorDecenas = decenas();
+        String[] vectorUnidades = unidades();
 
-        if (u == 0) {
-            if (d == 1) {
-                numeroLetra = decenas[0];
-            } else if (d == 2) {
-                numeroLetra = decenas[7];
+        if (unidades == 0) {
+            if (decenas == 1) {
+                numeroEnLetras = vectorDecenas[0];
+            } else if (decenas == 2) {
+                numeroEnLetras = vectorDecenas[7];
             } else {
-                numeroLetra = decenas[d + 6];
+                numeroEnLetras = vectorDecenas[decenas + 6];
             }
-            return numeroLetra + ".";
+            return numeroEnLetras + ".";
         }
 
-        if (d == 1) {
-            if (u <= 5) {
-                numeroLetra += decenas[u];
+        if (decenas == 1) {
+            if (unidades <= 5) {
+                numeroEnLetras += vectorDecenas[unidades];
             } else {
-                numeroLetra += decenas[6] + unidades[u];
+                numeroEnLetras += vectorDecenas[6] + vectorUnidades[unidades];
             }
-            return numeroLetra + ".";
+            return numeroEnLetras + ".";
         }
-        if (d == 2) {
-            numeroLetra = decenas[d + 6] + unidades[u];
-            return numeroLetra + ".";
+        if (decenas == 2) {
+            numeroEnLetras = vectorDecenas[decenas + 6] + vectorUnidades[unidades];
+            return numeroEnLetras + ".";
         }
-        numeroLetra = decenas[d + 6] + " y " + unidades[u];
-        return numeroLetra + ".";
+        numeroEnLetras = vectorDecenas[decenas + 6] + " y " + vectorUnidades[unidades];
+        return numeroEnLetras + ".";
     }
 
     /**
      *
      * @return
      */
-    @Override
-    public int random() {
-        double numeroRandom;
-        int pisoActual = Torre.getNivel();
+    public int numeroAleatorio() {
+        double numeroAleatorio;
+        int nivelActual = Torre.getNivel();
         int limiteSuperior = 19;
         int limiteInferior = 10;
-        if (pisoActual != 0) {
-            limiteInferior = 10 * pisoActual;
+        if (nivelActual != 0) {
+            limiteInferior = 10 * nivelActual;
             limiteSuperior = limiteInferior + 9;
         }
-        numeroRandom = current().nextInt(limiteInferior, limiteSuperior + 1);
-        return (int) (numeroRandom);
+        numeroAleatorio = current().nextInt(limiteInferior, limiteSuperior + 1);
+        return (int) (numeroAleatorio);
     }
 
+    /**
+     *
+     */
     @Override
-    public void aleatorio() {
-        String[] t = new String[2];
-        Torre.setNumeroActual(random());
-        t[0] = Integer.toString(Torre.getNumeroActual());
-        if (decision()) {
-            t[1] = cifrasALetras(Torre.getNumeroActual());
+    public void siguienteNumeroAleatorio() {
+        String[] numeros = new String[2];
+        Torre.setNumeroActual(numeroAleatorio());
+        numeros[0] = Integer.toString(Torre.getNumeroActual());
+        if (siguienteNumeroEnLetras()) {
+            numeros[1] = cifrasALetras(Torre.getNumeroActual());
         } else {
-            t[1] = t[0];
+            numeros[1] = numeros[0];
         }
-        Torre.setN(t);
+        Torre.setNumeros(numeros);
     }
 
-    public boolean decision() {
-        boolean d = true;
-        if (Torre.getNum() == 5) {
+    public boolean siguienteNumeroEnLetras() {
+        boolean decision = true;
+        if (Torre.getCantidadNumerosEnDigitos() == 5) {
             return true;
         }
-        if (Torre.getStr() == 5) {
+        if (Torre.getCantidadNumerosEnLetras() == 5) {
             return false;
         }
         if (current().nextInt(0, 1 + 1) == 0) {
-            d = false;
-            Torre.setNum(Torre.getNum() + 1);
+            decision = false;
+            Torre.setCantidadNumerosEnDigitos(Torre.getCantidadNumerosEnDigitos() + 1);
         } else {
-            Torre.setStr(Torre.getStr() + 1);
+            Torre.setCantidadNumerosEnLetras(Torre.getCantidadNumerosEnLetras() + 1);
         }
-        return d;
+        return decision;
     }
 
 }
