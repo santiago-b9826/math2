@@ -1,5 +1,6 @@
-package Controlador.Torre;
+package Controlador;
 
+import Modelo.Torre;
 import javax.swing.JTextField;
 
 /**
@@ -10,9 +11,7 @@ import javax.swing.JTextField;
  */
 public interface ControladorTorre {
 
-    public int getNumeroActual();
-
-    public String[] getN();
+    public Torre getTorre();
 
     public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, String numero);
 

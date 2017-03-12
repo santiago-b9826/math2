@@ -1,5 +1,6 @@
-package Controlador.Torre;
+package Controlador;
 
+import Modelo.Torre;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.swing.JTextField;
 
@@ -11,41 +12,15 @@ import javax.swing.JTextField;
  */
 public class ControladorTorreDosCifras implements ControladorTorre {
 
-    int numeroActual;
-    int str = 0;
-    int num = 0;
-    String[] n = new String[2];
+    Torre Torre = new Torre();
 
-    public int getNumeroActual() {
-        return numeroActual;
-    }
-
-    public void setNumeroActual(int numeroActual) {
-        this.numeroActual = numeroActual;
-    }
-
-    public String[] getN() {
-        return n;
-    }
-
-    public void setN(String[] n) {
-        this.n = n;
-    }
-
-    public int getStr() {
-        return str;
-    }
-
-    public void setStr(int s) {
-        this.str = s;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Torre getTorre() {
+        return Torre;
     }
 
     /**
@@ -122,36 +97,44 @@ public class ControladorTorreDosCifras implements ControladorTorre {
      */
     @Override
     public int random() {
-        double aux;
-        aux = current().nextInt(10, 99 + 1);
-        return (int) (aux);
+        double numeroRandom;
+        int pisoActual = Torre.getNivel();
+        int limiteSuperior = 19;
+        int limiteInferior = 10;
+        if (pisoActual != 0) {
+            limiteInferior = 10 * pisoActual;
+            limiteSuperior = limiteInferior + 9;
+        }
+        numeroRandom = current().nextInt(limiteInferior, limiteSuperior + 1);
+        return (int) (numeroRandom);
     }
 
+    @Override
     public void aleatorio() {
         String[] t = new String[2];
-        setNumeroActual(random());
-        t[0] = Integer.toString(getNumeroActual());
+        Torre.setNumeroActual(random());
+        t[0] = Integer.toString(Torre.getNumeroActual());
         if (decision()) {
-            t[1] = cifrasALetras(getNumeroActual());
+            t[1] = cifrasALetras(Torre.getNumeroActual());
         } else {
             t[1] = t[0];
         }
-        setN(t);
+        Torre.setN(t);
     }
 
     public boolean decision() {
         boolean d = true;
-        if (num == 5) {
+        if (Torre.getNum() == 5) {
             return true;
         }
-        if (str == 5) {
+        if (Torre.getStr() == 5) {
             return false;
         }
         if (current().nextInt(0, 1 + 1) == 0) {
             d = false;
-            setNum(getNum() + 1);
+            Torre.setNum(Torre.getNum() + 1);
         } else {
-            setStr(getStr() + 1);
+            Torre.setStr(Torre.getStr() + 1);
         }
         return d;
     }

@@ -1,8 +1,9 @@
-package Vista.Torre;
+package Vista;
 
-import Controlador.Torre.ControladorTorre;
-import Controlador.Torre.ControladorTorreDosCifras;
-import Controlador.Torre.ControladorTorreTresCifras;
+import Controlador.ControladorTorre;
+import Controlador.ControladorTorreDosCifras;
+import Controlador.ControladorTorreTresCifras;
+import Modelo.Torre;
 import javax.swing.JLabel;
 
 /**
@@ -11,25 +12,23 @@ import javax.swing.JLabel;
  * @author Angelica Arroyave Mendoza.
  * @author Juan Pablo Romero Laverde.
  */
-public class PrincipalT extends javax.swing.JFrame {
+public class VistaTorre extends javax.swing.JFrame {
 
-    ControladorTorre Torre;
-    int i;
-    int j;
+    ControladorTorre ControladorTorre;
+    Torre Torre;
 
-    public PrincipalT(int j) {
+    public VistaTorre(int j) {
         initComponents();
         setLocationRelativeTo(null);
         inicializarLabels();
-        this.j = j;
         if (j == 2) {
-            Torre = new ControladorTorreDosCifras();
+            ControladorTorre = new ControladorTorreDosCifras();
             txtCentenas.setVisible(false);
         } else {
-            Torre = new ControladorTorreTresCifras();
-        }        
+            ControladorTorre = new ControladorTorreTresCifras();
+        }
+        Torre = ControladorTorre.getTorre();
         nuevoNumero();
-        i = 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -64,37 +63,37 @@ public class PrincipalT extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nivel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/1.png"))); // NOI18N
+        nivel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/1.png"))); // NOI18N
         jPanel1.add(nivel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 1110, -1, -1));
 
-        nivel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/5.png"))); // NOI18N
+        nivel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/5.png"))); // NOI18N
         jPanel1.add(nivel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 730, 130, 140));
 
-        nivel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/3.png"))); // NOI18N
+        nivel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/3.png"))); // NOI18N
         jPanel1.add(nivel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 860, -1, 140));
 
-        nivel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/2.png"))); // NOI18N
+        nivel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/2.png"))); // NOI18N
         jPanel1.add(nivel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 990, 130, 120));
 
-        nivel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/4.png"))); // NOI18N
+        nivel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/4.png"))); // NOI18N
         jPanel1.add(nivel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 640, 140, 100));
 
-        nivel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/6.png"))); // NOI18N
+        nivel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/6.png"))); // NOI18N
         jPanel1.add(nivel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 160, 140));
 
-        nivel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/8.png"))); // NOI18N
+        nivel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/8.png"))); // NOI18N
         jPanel1.add(nivel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 130, 120));
 
-        nivel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/7.png"))); // NOI18N
+        nivel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/7.png"))); // NOI18N
         jPanel1.add(nivel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 120, 110));
 
-        nivel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/9.png"))); // NOI18N
+        nivel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/9.png"))); // NOI18N
         jPanel1.add(nivel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 130, 140));
 
-        nivel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/10.png"))); // NOI18N
+        nivel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/10.png"))); // NOI18N
         jPanel1.add(nivel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 140, 160));
 
-        fondoScroll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/Fscll.jpg"))); // NOI18N
+        fondoScroll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Fscll.jpg"))); // NOI18N
         jPanel1.add(fondoScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 450));
 
         jScrollPane1.setViewportView(jPanel1);
@@ -115,20 +114,18 @@ public class PrincipalT extends javax.swing.JFrame {
         txtNumero.setEnabled(false);
         getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 260, -1));
 
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/F1.jpg"))); // NOI18N
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/F1.jpg"))); // NOI18N
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTorreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTorreActionPerformed
-
-        boolean numeroValido = Torre.validarNumero(txtUnidades, txtDecenas, txtCentenas, Torre.getN()[0]);
-        if (numeroValido && i < 9) {
-            labels()[i].setVisible(true);
-            nuevoNumero();
-            //Mensaje felicitando
-            i += 1;
+        boolean numeroValido;
+        numeroValido = ControladorTorre.validarNumero(txtUnidades, txtDecenas, txtCentenas, Torre.getN()[0]);
+        int piso = Torre.getNivel();
+        if (numeroValido && piso < 9) {
+            nuevoNumero(piso);
         }
         reiniciarTxt();
 
@@ -136,9 +133,16 @@ public class PrincipalT extends javax.swing.JFrame {
     public JLabel label(int i) {
         return labels()[i];
     }
-    public void nuevoNumero(){
-        Torre.aleatorio();
+
+    private void nuevoNumero() {
+        ControladorTorre.aleatorio();
         txtNumero.setText(Torre.getN()[1]);
+    }
+
+    private void nuevoNumero(int piso) {
+        labels()[piso].setVisible(true);
+        Torre.setNivel(piso + 1);
+        nuevoNumero();
     }
 
     private void inicializarLabels() {
@@ -182,20 +186,23 @@ public class PrincipalT extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaTorre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalT(3).setVisible(true);
+                new VistaTorre(2).setVisible(true);
             }
         });
     }
