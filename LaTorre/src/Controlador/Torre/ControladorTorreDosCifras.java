@@ -1,6 +1,6 @@
 package Controlador.Torre;
 
-import java.util.concurrent.ThreadLocalRandom;
+import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.swing.JTextField;
 
 /**
@@ -11,6 +11,43 @@ import javax.swing.JTextField;
  */
 public class ControladorTorreDosCifras implements ControladorTorre {
 
+    int numeroActual;
+    int str = 0;
+    int num = 0;
+    String[] n = new String[2];
+
+    public int getNumeroActual() {
+        return numeroActual;
+    }
+
+    public void setNumeroActual(int numeroActual) {
+        this.numeroActual = numeroActual;
+    }
+
+    public String[] getN() {
+        return n;
+    }
+
+    public void setN(String[] n) {
+        this.n = n;
+    }
+
+    public int getStr() {
+        return str;
+    }
+
+    public void setStr(int s) {
+        this.str = s;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     /**
      *
      * @param unidades
@@ -20,19 +57,17 @@ public class ControladorTorreDosCifras implements ControladorTorre {
      * @return
      */
     @Override
-    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero) {
+    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, String numero) {
         boolean u;
         boolean d;
-        boolean c;
-        u = unidades.getText().equals(numero.getText().substring(1, 2));
-        d = decenas.getText().equals(numero.getText().substring(0, 1));
-        c = centenas.getText().equals("0");
-        return (u && d && c);
+        u = unidades.getText().equals(numero.substring(1, 2));
+        d = decenas.getText().equals(numero.substring(0, 1));
+        return (u && d);
     }
 
     public String[] decenas() {
-        String[] decenas = {"diez", "once", "doce", "trece", "catorce", "quince", "dieci", "veinte",
-            "veinti", "treinta", "cuarenta", "ciencuenta", "sesenta", "setenta", "ochenta", "noventa"};
+        String[] decenas = {"Diez", "Once", "Doce", "Trece", "Catorce", "Quince", "Dieci", "Veinte",
+            "Veinti", "Treinta", "Cuarenta", "Ciencuenta", "Sesenta", "Setenta", "Ochenta", "Noventa"};
         return decenas;
     }
 
@@ -88,8 +123,37 @@ public class ControladorTorreDosCifras implements ControladorTorre {
     @Override
     public int random() {
         double aux;
-        aux = ThreadLocalRandom.current().nextInt(10, 99 + 1);
+        aux = current().nextInt(10, 99 + 1);
         return (int) (aux);
+    }
+
+    public void aleatorio() {
+        String[] t = new String[2];
+        setNumeroActual(random());
+        t[0] = Integer.toString(getNumeroActual());
+        if (decision()) {
+            t[1] = cifrasALetras(getNumeroActual());
+        } else {
+            t[1] = t[0];
+        }
+        setN(t);
+    }
+
+    public boolean decision() {
+        boolean d = true;
+        if (num == 5) {
+            return true;
+        }
+        if (str == 5) {
+            return false;
+        }
+        if (current().nextInt(0, 1 + 1) == 0) {
+            d = false;
+            setNum(getNum() + 1);
+        } else {
+            setStr(getStr() + 1);
+        }
+        return d;
     }
 
 }

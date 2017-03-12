@@ -10,9 +10,15 @@ import javax.swing.JTextField;
  */
 public interface ControladorTorre {
 
-    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, JTextField numero);
+    public int getNumeroActual();
+
+    public String[] getN();
+
+    public boolean validarNumero(JTextField unidades, JTextField decenas, JTextField centenas, String numero);
 
     public String cifrasALetras(int a);
 
     int random();
+
+    public void aleatorio();
 }

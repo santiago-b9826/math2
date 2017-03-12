@@ -24,10 +24,11 @@ public class PrincipalT extends javax.swing.JFrame {
         this.j = j;
         if (j == 2) {
             Torre = new ControladorTorreDosCifras();
+            txtCentenas.setVisible(false);
         } else {
             Torre = new ControladorTorreTresCifras();
-        }
-        txtNumero.setText(Integer.toString(Torre.random()));
+        }        
+        nuevoNumero();
         i = 0;
     }
 
@@ -112,7 +113,7 @@ public class PrincipalT extends javax.swing.JFrame {
         getContentPane().add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 70, -1));
 
         txtNumero.setEnabled(false);
-        getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 70, -1));
+        getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 260, -1));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/Torre/F1.jpg"))); // NOI18N
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 630));
@@ -121,20 +122,23 @@ public class PrincipalT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTorreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTorreActionPerformed
-        boolean numeroValido = Torre.validarNumero(txtUnidades, txtDecenas, txtCentenas, txtNumero);
+
+        boolean numeroValido = Torre.validarNumero(txtUnidades, txtDecenas, txtCentenas, Torre.getN()[0]);
         if (numeroValido && i < 9) {
             labels()[i].setVisible(true);
-            txtNumero.setText(Integer.toString(Torre.random()));
-            reiniciarTxt();
+            nuevoNumero();
             //Mensaje felicitando
             i += 1;
-        } else {
-            //Mensaje motivacional
         }
+        reiniciarTxt();
 
     }//GEN-LAST:event_btnTorreActionPerformed
     public JLabel label(int i) {
         return labels()[i];
+    }
+    public void nuevoNumero(){
+        Torre.aleatorio();
+        txtNumero.setText(Torre.getN()[1]);
     }
 
     private void inicializarLabels() {
