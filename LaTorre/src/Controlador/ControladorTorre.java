@@ -25,8 +25,8 @@ public abstract class ControladorTorre {
     }
 
     public String[] centenas() {
-        String[] centenas = {"Ciento", "Cien", "Doscientos", "Trescientos", "Cuatrocientos",
-            "Quinientos", "Seiscientos", "Setecientos", "Ochocientos", "Novecientos"};
+        String[] centenas = {"ciento", "cien", "doscientos", "trescientos", "cuatrocientos",
+            "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"};
         return centenas;
     }
 
@@ -47,6 +47,7 @@ public abstract class ControladorTorre {
         numeros[0] = Integer.toString(Torre.getNumeroActual());
         if (siguienteNumeroEnLetras()) {
             numeros[1] = cifrasALetras(Torre.getNumeroActual());
+            numeros[1] = numeros[1].substring(0, 1).toUpperCase() + numeros[1].replaceFirst(numeros[1].substring(0, 1), "");
         } else {
             numeros[1] = numeros[0];
         }
