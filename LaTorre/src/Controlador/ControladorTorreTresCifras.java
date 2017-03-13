@@ -1,6 +1,5 @@
 package Controlador;
 
-import Modelo.ModeloTorre;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.swing.JTextField;
 
@@ -10,60 +9,16 @@ import javax.swing.JTextField;
  * @author Angelica Arroyame Mendoza
  * @author Juan Pablo Romero Laverde
  */
-public class ControladorTorreTresCifras implements ControladorTorre {
+public class ControladorTorreTresCifras extends ControladorTorre {
 
-    ModeloTorre Torre = new ModeloTorre();
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public ModeloTorre getTorre() {
-        return Torre;
-    }
-
-    /**
-     *
-     * @param txtFUnidades
-     * @param txtFDecenas
-     * @param txtFCentenas
-     * @param numeroCorrecto
-     * @return
-     */
     @Override
     public boolean validarNumero(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas, String numeroCorrecto) {
-        boolean unidadesCorrectas;
-        boolean decenasCorrectas;
-        boolean centenasCorrectas;
-        unidadesCorrectas = txtFUnidades.getText().equals(numeroCorrecto.substring(2, 3));
-        decenasCorrectas = txtFDecenas.getText().equals(numeroCorrecto.substring(1, 2));
-        centenasCorrectas = txtFCentenas.getText().equals(numeroCorrecto.substring(0, 1));
+        boolean unidadesCorrectas = txtFUnidades.getText().equals(numeroCorrecto.substring(2, 3));
+        boolean decenasCorrectas = txtFDecenas.getText().equals(numeroCorrecto.substring(1, 2));
+        boolean centenasCorrectas = txtFCentenas.getText().equals(numeroCorrecto.substring(0, 1));
         return (unidadesCorrectas && decenasCorrectas && centenasCorrectas);
     }
 
-    public String[] centenas() {
-        String[] centenas = {"Ciento", "Cien", "Doscientos", "Trescientos", "Cuatrocientos",
-            "Quinientos", "Seiscientos", "Setecientos", "Ochocientos", "Novecientos"};
-        return centenas;
-    }
-
-    public String[] decenas() {
-        String[] decenas = {"diez", "once", "doce", "trece", "catorce", "quince", "dieci", "veinte",
-            "veinti", "treinta", "cuarenta", "ciencuenta", "sesenta", "setenta", "ochenta", "noventa"};
-        return decenas;
-    }
-
-    public String[] unidades() {
-        String[] unidades = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
-        return unidades;
-    }
-
-    /**
-     *
-     * @param a
-     * @return
-     */
     @Override
     public String cifrasALetras(int a) {
         int unidades = a % 10;
@@ -110,10 +65,7 @@ public class ControladorTorreTresCifras implements ControladorTorre {
         return numeroEnLetras + ".";
     }
 
-    /**
-     *
-     * @return
-     */
+    @Override
     public int numeroAleatorio() {
         double numeroAleatorio;
         int nivelActual = Torre.getNivel();
@@ -127,36 +79,4 @@ public class ControladorTorreTresCifras implements ControladorTorre {
         return (int) (numeroAleatorio);
     }
 
-    /**
-     *
-     */
-    @Override
-    public void siguienteNumeroAleatorio() {
-        String[] numeros = new String[2];
-        Torre.setNumeroActual(numeroAleatorio());
-        numeros[0] = Integer.toString(Torre.getNumeroActual());
-        if (siguienteNumeroEnLetras()) {
-            numeros[1] = cifrasALetras(Torre.getNumeroActual());
-        } else {
-            numeros[1] = numeros[0];
-        }
-        Torre.setNumeros(numeros);
-    }
-
-    public boolean siguienteNumeroEnLetras() {
-        boolean decision = true;
-        if (Torre.getCantidadNumerosEnDigitos() == 5) {
-            return true;
-        }
-        if (Torre.getCantidadNumerosEnLetras() == 5) {
-            return false;
-        }
-        if (current().nextInt(0, 1 + 1) == 0) {
-            decision = false;
-            Torre.setCantidadNumerosEnDigitos(Torre.getCantidadNumerosEnDigitos() + 1);
-        } else {
-            Torre.setCantidadNumerosEnLetras(Torre.getCantidadNumerosEnLetras() + 1);
-        }
-        return decision;
-    }
 }

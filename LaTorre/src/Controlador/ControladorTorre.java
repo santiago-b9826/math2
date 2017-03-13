@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.ModeloTorre;
+import static java.util.concurrent.ThreadLocalRandom.current;
 import javax.swing.JTextField;
 
 /**
@@ -9,13 +10,63 @@ import javax.swing.JTextField;
  * @author Angelica Arroyame Mendoza
  * @author Juan Pablo Romero Laverde
  */
-public interface ControladorTorre {
+public abstract class ControladorTorre {
 
-    public ModeloTorre getTorre();
+    ModeloTorre Torre = new ModeloTorre();
 
-    public boolean validarNumero(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas, String numeroCorrecto);
+    public abstract boolean validarNumero(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas, String numeroCorrecto);
 
-    public String cifrasALetras(int a);
+    public abstract String cifrasALetras(int a);
 
-    public void siguienteNumeroAleatorio();
+    public abstract int numeroAleatorio();
+
+    public ModeloTorre getTorre() {
+        return Torre;
+    }
+
+    public String[] centenas() {
+        String[] centenas = {"Ciento", "Cien", "Doscientos", "Trescientos", "Cuatrocientos",
+            "Quinientos", "Seiscientos", "Setecientos", "Ochocientos", "Novecientos"};
+        return centenas;
+    }
+
+    public String[] decenas() {
+        String[] decenas = {"diez", "once", "doce", "trece", "catorce", "quince", "dieci", "veinte",
+            "veinti", "treinta", "cuarenta", "ciencuenta", "sesenta", "setenta", "ochenta", "noventa"};
+        return decenas;
+    }
+
+    public String[] unidades() {
+        String[] unidades = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
+        return unidades;
+    }
+
+    public void siguienteNumeroAleatorio() {
+        String[] numeros = new String[2];
+        Torre.setNumeroActual(numeroAleatorio());
+        numeros[0] = Integer.toString(Torre.getNumeroActual());
+        if (siguienteNumeroEnLetras()) {
+            numeros[1] = cifrasALetras(Torre.getNumeroActual());
+        } else {
+            numeros[1] = numeros[0];
+        }
+        Torre.setNumeros(numeros);
+    }
+
+    public boolean siguienteNumeroEnLetras() {
+        boolean decision = true;
+        if (Torre.getCantidadNumerosEnDigitos() == 5) {
+            return true;
+        }
+        if (Torre.getCantidadNumerosEnLetras() == 5) {
+            return false;
+        }
+        if (current().nextInt(0, 1 + 1) == 0) {
+            decision = false;
+            Torre.setCantidadNumerosEnDigitos(Torre.getCantidadNumerosEnDigitos() + 1);
+        } else {
+            Torre.setCantidadNumerosEnLetras(Torre.getCantidadNumerosEnLetras() + 1);
+        }
+        return decision;
+    }
 }
