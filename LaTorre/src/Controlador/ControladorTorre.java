@@ -24,6 +24,15 @@ public abstract class ControladorTorre {
         return Torre;
     }
 
+    public String mensaje(int numeroMensaje) {
+        String[] mensajes = new String[4];
+        mensajes[0] = "Te equivocaste. ¡Puedes lograrlo!";
+        mensajes[1] = "Muy Bien. ¡Continúa!";
+        mensajes[2] = "Aún no has terminado, la proxima vez lo lograras.";
+        mensajes[3] = "Ha ocurrido un pequeño temblor.\nOrganiza los números por favor.";
+        return mensajes[numeroMensaje];
+    }
+
     public String[] centenas() {
         String[] centenas = {"ciento", "cien", "doscientos", "trescientos", "cuatrocientos",
             "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"};
