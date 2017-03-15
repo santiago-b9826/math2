@@ -10,9 +10,9 @@ public class ModeloTorre {
 
     protected int nivel;
     protected int numeroActual;
+    String numeroString;
     protected int cantidadNumerosEnLetras;
-    protected int cantidadNumerosEnDigitos;
-    String[] numeros = new String[2];
+    protected int cantidadNumerosEnDigitos;    
 
     public ModeloTorre() {
         nivel = 0;
@@ -36,12 +36,12 @@ public class ModeloTorre {
         this.numeroActual = numeroActual;
     }
 
-    public String[] getNumeros() {
-        return numeros;
+    public String getNumeroString() {
+        return numeroString;
     }
 
-    public void setNumeros(String[] numeros) {
-        this.numeros = numeros;
+    public void setNumeroString(String numeroString) {
+        this.numeroString = numeroString;
     }
 
     public int getCantidadNumerosEnLetras() {

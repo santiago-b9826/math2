@@ -51,16 +51,14 @@ public abstract class ControladorTorre {
     }
 
     public void siguienteNumeroAleatorio() {
-        String[] numeros = new String[2];
+        String numeros;
         Torre.setNumeroActual(numeroAleatorio());
-        numeros[0] = Integer.toString(Torre.getNumeroActual());
+        numeros = Integer.toString(Torre.getNumeroActual());
         if (siguienteNumeroEnLetras()) {
-            numeros[1] = cifrasALetras(Torre.getNumeroActual());
-            numeros[1] = numeros[1].substring(0, 1).toUpperCase() + numeros[1].replaceFirst(numeros[1].substring(0, 1), "");
-        } else {
-            numeros[1] = numeros[0];
+            numeros = cifrasALetras(Torre.getNumeroActual());
+            numeros = numeros.substring(0, 1).toUpperCase() + numeros.replaceFirst(numeros.substring(0, 1), "");
         }
-        Torre.setNumeros(numeros);
+        Torre.setNumeroString(numeros);
     }
 
     public boolean siguienteNumeroEnLetras() {
