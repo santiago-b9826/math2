@@ -77,4 +77,12 @@ public abstract class ControladorTorre {
         }
         return decision;
     }
+
+    public String eliminarCerosSignificativos(String numero) {
+        if (numero.length() == 1 || !numero.substring(0, 1).equals("0")) {
+            return numero;
+        }
+        numero = numero.replaceFirst(numero.substring(0, 1), "");
+        return eliminarCerosSignificativos(numero);
+    }
 }

@@ -13,9 +13,9 @@ public class ControladorTorreTresCifras extends ControladorTorre {
 
     @Override
     public boolean validarNumero(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas, String numeroCorrecto) {
-        boolean unidadesCorrectas = txtFUnidades.getText().equals(numeroCorrecto.substring(2, 3));
-        boolean decenasCorrectas = txtFDecenas.getText().equals(numeroCorrecto.substring(1, 2));
-        boolean centenasCorrectas = txtFCentenas.getText().equals(numeroCorrecto.substring(0, 1));
+        boolean unidadesCorrectas = eliminarCerosSignificativos(txtFUnidades.getText()).equals(numeroCorrecto.substring(2, 3));
+        boolean decenasCorrectas = eliminarCerosSignificativos(txtFDecenas.getText()).equals(numeroCorrecto.substring(1, 2));
+        boolean centenasCorrectas = eliminarCerosSignificativos(txtFCentenas.getText()).equals(numeroCorrecto.substring(0, 1));
         return (unidadesCorrectas && decenasCorrectas && centenasCorrectas);
     }
 

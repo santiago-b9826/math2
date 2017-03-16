@@ -21,11 +21,6 @@ public class VistaTorre extends javax.swing.JFrame {
     public VistaTorre(int cantidadDeCifras) {
         initComponents();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-//        float escalar = 0;
-//        int ancho = (int) (Toolkit.getDefaultToolkit().getScreenSize().width * escalar);
-//        int alto = (int) (Toolkit.getDefaultToolkit().getScreenSize().height * escalar);
-//        this.setSize(ancho, alto);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         inicializarLabels();
         if (cantidadDeCifras == 2) {
@@ -87,7 +82,7 @@ public class VistaTorre extends javax.swing.JFrame {
                 btnVerificarNumeroActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVerificarNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, -1));
+        getContentPane().add(btnVerificarNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, -1, -1));
         getContentPane().add(txtFCentenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 70, -1));
         getContentPane().add(txtFDecenas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, 70, -1));
         getContentPane().add(txtFUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 70, -1));
@@ -267,10 +262,16 @@ public class VistaTorre extends javax.swing.JFrame {
         }
     }
 
-    public void reiniciarTxtF(JTextField txtFUnidades, JTextField txtFDecenas,JTextField txtFCentenas ) {
+    public void reiniciarTxtF(JTextField txtFUnidades, JTextField txtFDecenas, JTextField txtFCentenas) {
         txtFUnidades.setText("");
         txtFDecenas.setText("");
         txtFCentenas.setText("");
+    }
+
+    public void estadoTxtf(boolean instruccion) {
+        txtFUnidades.setEnabled(instruccion);
+        txtFDecenas.setEnabled(instruccion);
+        txtFCentenas.setEnabled(instruccion);
     }
 
     public JLabel[] nivelesTorre() {
